@@ -2,9 +2,9 @@ CREATE TABLE Users (
     id_user INT PRIMARY KEY AUTO_INCREMENT,
     Firstname VARCHAR(255) NOT NULL,
     Surname VARCHAR(255) NOT NULL,
-    Classe VARCHAR(255) NOT NULL,
+    Classroom VARCHAR(255) NOT NULL,
     Sector VARCHAR(255) NOT NULL,
-    Condition ENUM('Admin', 'Etudiant') NOT NULL,
+    Condition ENUM('Admin', 'Student') NOT NULL,
     UserPassword VARCHAR(255) NOT NULL,
     Username VARCHAR(255) NOT NULL
 );
