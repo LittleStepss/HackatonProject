@@ -14,7 +14,7 @@ CREATE TABLE teacher (
 
 CREATE TABLE poll (
     poll_id INT PRIMARY KEY AUTO_INCREMENT,
-    fk_user_mail INT,
+    fk_user_mail VARCHAR(100),
     fk_id_teacher INT,
     score INT NOT NULL,
     comment TEXT NOT NULL,
