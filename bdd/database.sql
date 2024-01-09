@@ -1,32 +1,25 @@
-CREATE TABLE Users (
-    id_user INT PRIMARY KEY AUTO_INCREMENT,
-    Firstname VARCHAR(255) NOT NULL,
-    Surname VARCHAR(255) NOT NULL,
-    Classroom VARCHAR(255) NOT NULL,
-    Sector VARCHAR(255) NOT NULL,
-    Condition ENUM('Admin', 'Student') NOT NULL,
-    UserPassword VARCHAR(255) NOT NULL,
-    Username VARCHAR(255) NOT NULL
+CREATE TABLE user (
+    mail VARCHAR(100) PRIMARY KEY NOT NULL,
+    status VARCHAR(100) NOT NULL,
+    hash VARCHAR(255) NOT NULL,
 );
 
-
-CREATE TABLE Teacher (
-    id_teacher INT PRIMARY KEY AUTO_INCREMENT,
-    FirstnameTeacher VARCHAR(255) NOT NULL,
-    SurnameTeacher VARCHAR(255) NOT NULL,
-    Sector VARCHAR(255) NOT NULL,
-    Module VARCHAR(255) NOT NULL
+CREATE TABLE teacher (
+    teacher_id INT PRIMARY KEY AUTO_INCREMENT,
+    firstname VARCHAR(255) NOT NULL,
+    lastname VARCHAR(255) NOT NULL,
+    sector VARCHAR(255) NOT NULL,
+    module VARCHAR(255) NOT NULL
 );
 
-
-CREATE TABLE Poll (
-    id_poll INT PRIMARY KEY AUTO_INCREMENT,
-    id_user INT,
-    id_teacher INT,
-    note INT NOT NULL,
-    avis TEXT NOT NULL,
-    Report BOOLEAN,
-    FOREIGN KEY (id_user) REFERENCES User(id_user),
-    FOREIGN KEY (id_teacher) REFERENCES Teacher(id_teacher)
+CREATE TABLE poll (
+    poll_id INT PRIMARY KEY AUTO_INCREMENT,
+    fk_user_mail INT,
+    fk_id_teacher INT,
+    score INT NOT NULL,
+    comment TEXT NOT NULL,
+    report BOOLEAN,
+    FOREIGN KEY (fk_user_mail) REFERENCES user(mail),
+    FOREIGN KEY (fk_id_teacher) REFERENCES teacher(teacher_id)
 );
 
