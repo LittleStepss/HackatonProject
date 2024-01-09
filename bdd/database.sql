@@ -1,7 +1,7 @@
 CREATE TABLE user (
     mail VARCHAR(100) PRIMARY KEY NOT NULL,
     status VARCHAR(100) NOT NULL,
-    hash VARCHAR(255) NOT NULL,
+    hash VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE teacher (
