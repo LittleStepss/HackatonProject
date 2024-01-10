@@ -14,9 +14,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className="">
-        <Image src={logo} alt="logo" />
+    <html lang="fr">
+      <body className="min-h-screen overflow-hidden flex flex-wrap flex-col justify-center items-center">
+        <Image src={logo} alt="logo" className="absolute top-0 left-0" />
         {children}
       </body>
     </html>
