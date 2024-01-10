@@ -34,10 +34,12 @@ func main() {
 		w.Write([]byte("API is up ! 👍\n"))
 	})
 	http.HandleFunc("/teachers", func(w http.ResponseWriter, r *http.Request) {
+		// Check the request method
 		if r.Method != http.MethodGet {
 			http.Error(w, "wrong request method", http.StatusMethodNotAllowed)
 			return
 		}
+		// Decode the json payload body
 		var payload struct {
 			Token string `json:"api_token"`
 		}
@@ -46,6 +48,7 @@ func main() {
 			http.Error(w, fmt.Sprintf("json.NewDecoder(r.Body).Decode(&payload): %v", err), http.StatusInternalServerError)
 			return
 		}
+		// Validate the token
 		ok, err := database.CheckToken(db, payload.Token)
 		if err != nil {
 			log.Printf("database.CheckToken(db, payload.Token): %v", err)
@@ -56,6 +59,7 @@ func main() {
 			http.Error(w, "wrong token", http.StatusUnauthorized)
 			return
 		}
+		// Do the logic
 		teachers, err := database.GetTeachers(db)
 		if err != nil {
 			log.Printf("database.GetTeachers: %v", err)
