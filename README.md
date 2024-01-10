@@ -1,7 +1,7 @@
 # HackatonProject
 
 ### Contexte
-**Hackaton 8 janv - 12 janv 2024**
+**Hackaton 8 janv - 12 janv 2024**  
 Par groupes de 3 à 4, nous devions imaginer un projet qui respectait le sujet donné : 
 *"Ce qui nous manque sur l'extranet"*
  
