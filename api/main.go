@@ -38,6 +38,24 @@ func main() {
 			http.Error(w, "wrong request method", http.StatusMethodNotAllowed)
 			return
 		}
+		var payload struct {
+			Token string `json:"api_token"`
+		}
+		if err := json.NewDecoder(r.Body).Decode(&payload); err != nil {
+			log.Printf("json.NewDecoder(r.Body).Decode(&payload): %v", err)
+			http.Error(w, fmt.Sprintf("json.NewDecoder(r.Body).Decode(&payload): %v", err), http.StatusInternalServerError)
+			return
+		}
+		ok, err := database.CheckToken(db, payload.Token)
+		if err != nil {
+			log.Printf("database.CheckToken(db, payload.Token): %v", err)
+			http.Error(w, fmt.Sprintf("database.CheckToken(db, payload.Token): %v", err), http.StatusInternalServerError)
+			return
+		}
+		if !ok {
+			http.Error(w, "wrong token", http.StatusUnauthorized)
+			return
+		}
 		teachers, err := database.GetTeachers(db)
 		if err != nil {
 			log.Printf("database.GetTeachers: %v", err)
@@ -86,6 +104,11 @@ func main() {
 			Message  string `json:"message"`
 			ApiToken string `json:"api_token"`
 			Score    int    `json:"score"`
+		}
+		if err := json.NewDecoder(r.Body).Decode(&payload); err != nil {
+			log.Printf("json.NewDecoder(r.Body).Decode(&payload): %v", err)
+			http.Error(w, fmt.Sprintf("json.NewDecoder(r.Body).Decode(&payload): %v", err), http.StatusInternalServerError)
+			return
 		}
 		mail, err := base64.StdEncoding.DecodeString(payload.ApiToken)
 		if err != nil {
