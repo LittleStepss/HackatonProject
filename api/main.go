@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -75,6 +76,28 @@ func main() {
 			w.WriteHeader(http.StatusUnauthorized)
 		}
 		w.Write([]byte(res))
+	})
+	http.HandleFunc("/poll", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodPost {
+			http.Error(w, "wrong request method", http.StatusMethodNotAllowed)
+			return
+		}
+		var payload struct {
+			Message  string `json:"message"`
+			ApiToken string `json:"api_token"`
+			Score    int    `json:"score"`
+		}
+		mail, err := base64.StdEncoding.DecodeString(payload.ApiToken)
+		if err != nil {
+			log.Printf("ase64.StdEncoding.DecodeString: %v", err)
+			http.Error(w, fmt.Sprintf("ase64.StdEncoding.DecodeString: %v", err), http.StatusInternalServerError)
+			return
+		}
+		if err := database.CreatePoll(string(mail), payload.Message, payload.Score); err != nil {
+			log.Printf("database.CreatePoll: %v", err)
+			http.Error(w, fmt.Sprintf("database.CreatePoll: %v", err), http.StatusInternalServerError)
+			return
+		}
 	})
 	// Start the api
 	fmt.Printf("Api is up on address: 0.0.0.0:%d => http://localhost:%d 🔥\n", port, port)
