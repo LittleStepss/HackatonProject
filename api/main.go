@@ -51,6 +51,31 @@ func main() {
 		}
 		w.Write(byteTeachers)
 	})
+	http.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodPost {
+			http.Error(w, "wrong request method", http.StatusMethodNotAllowed)
+			return
+		}
+		var payload struct {
+			Mail     string `json:"mail"`
+			Password string `json:"password"`
+		}
+		if err := json.NewDecoder(r.Body).Decode(&payload); err != nil {
+			log.Printf("json.NewDecoder(r.Body).Decode(&payload): %v", err)
+			http.Error(w, fmt.Sprintf("json.NewDecoder(r.Body).Decode(&payload): %v", err), http.StatusInternalServerError)
+			return
+		}
+		res, logged, err := database.Login(db, payload.Mail, payload.Password)
+		if err != nil {
+			log.Printf("database.Login(db, payload.Mail, payload.Password): %v", err)
+			http.Error(w, fmt.Sprintf("database.Login(db, payload.Mail, payload.Password): %v", err), http.StatusInternalServerError)
+			return
+		}
+		if !logged {
+			w.WriteHeader(http.StatusUnauthorized)
+		}
+		w.Write([]byte(res))
+	})
 	// Start the api
 	fmt.Printf("Api is up on address: 0.0.0.0:%d => http://localhost:%d 🔥\n", port, port)
 
