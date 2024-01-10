@@ -8,7 +8,9 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-/*return the database connection*/
+/*
+Return the database connection
+*/
 func GetDbConn() (*sql.DB, error) {
 	dbHostname := "localhost"
 	_dbHostname, isSet := os.LookupEnv("DB_HOSTNAME")
