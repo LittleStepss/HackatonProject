@@ -1,5 +1,5 @@
 package database
 
-func CreatePoll(mail string, message string, score int) error {
+func CreatePoll(apiToken string, message string, score int) error {
 	return nil
 }
