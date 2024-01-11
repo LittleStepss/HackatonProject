@@ -97,10 +97,20 @@ func main() {
 			return
 		}
 		apiToken := r.Header.Get("API_TOKEN")
+		ok, err := database.CheckToken(db, apiToken)
+		if err != nil {
+			log.Printf(`database.CheckToken(db, apiToken): %v`, err)
+			http.Error(w, fmt.Sprintf(`database.CheckToken(db, apiToken): %v`, err), http.StatusInternalServerError)
+			return
+		}
+		if !ok {
+			http.Error(w, "wrong token", http.StatusUnauthorized)
+			return
+		}
 		var payload struct {
-			comment       string `json:"Message"`
-			score         int    `json:"Score"`
-			fk_id_teacher int    `json:"TeacherID"`
+			Comment   string `json:"message"`
+			Score     int    `json:"score"`
+			IdTeacher int    `json:"id_teacher"`
 		}
 		if err := json.NewDecoder(r.Body).Decode(&payload); err != nil {
 			log.Printf("json.NewDecoder(r.Body).Decode(&payload): %v", err)
@@ -113,11 +123,12 @@ func main() {
 			http.Error(w, fmt.Sprintf("ase64.StdEncoding.DecodeString: %v", err), http.StatusInternalServerError)
 			return
 		}
-		if err := database.CreatePoll(db, string(mail), payload.comment, payload.score, payload.fk_id_teacher); err != nil {
+		if err := database.CreatePoll(db, string(mail), payload.Comment, payload.Score, payload.IdTeacher); err != nil {
 			log.Printf("database.CreatePoll: %v", err)
 			http.Error(w, fmt.Sprintf("database.CreatePoll: %v", err), http.StatusInternalServerError)
 			return
 		}
+		w.Write([]byte(`{"success":"poll created successfully"}`))
 	})
 	// Start the api
 	fmt.Printf("Api is up on address: 0.0.0.0:%d => http://localhost:%d 🔥\n", port, port)
