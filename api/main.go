@@ -40,7 +40,7 @@ func main() {
 			return
 		}
 		// Decode the json payload body
-		apiToken :=	r.Header.Get("API_TOKEN")
+		apiToken := r.Header.Get("API_TOKEN")
 		// Validate the token
 		ok, err := database.CheckToken(db, apiToken)
 		if err != nil {
@@ -99,8 +99,9 @@ func main() {
 		}
 		apiToken := r.Header.Get("API_TOKEN")
 		var payload struct {
-			Message  string `json:"message"`
-			Score    int    `json:"score"`
+			comment       string `json:"Message"`
+			score         int    `json:"Score"`
+			fk_id_teacher int    `json:"TeacherID"`
 		}
 		if err := json.NewDecoder(r.Body).Decode(&payload); err != nil {
 			log.Printf("json.NewDecoder(r.Body).Decode(&payload): %v", err)
@@ -113,7 +114,7 @@ func main() {
 			http.Error(w, fmt.Sprintf("ase64.StdEncoding.DecodeString: %v", err), http.StatusInternalServerError)
 			return
 		}
-		if err := database.CreatePoll(db,string(mail), payload.Message, payload.Score); err != nil {
+		if err := database.CreatePoll(db, string(mail), payload.comment, payload.score, payload.fk_id_teacher); err != nil {
 			log.Printf("database.CreatePoll: %v", err)
 			http.Error(w, fmt.Sprintf("database.CreatePoll: %v", err), http.StatusInternalServerError)
 			return
