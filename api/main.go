@@ -40,19 +40,12 @@ func main() {
 			return
 		}
 		// Decode the json payload body
-		var payload struct {
-			Token string `json:"api_token"`
-		}
-		if err := json.NewDecoder(r.Body).Decode(&payload); err != nil {
-			log.Printf("json.NewDecoder(r.Body).Decode(&payload): %v", err)
-			http.Error(w, fmt.Sprintf("json.NewDecoder(r.Body).Decode(&payload): %v", err), http.StatusInternalServerError)
-			return
-		}
+		apiToken :=	r.Header.Get("API_TOKEN")
 		// Validate the token
-		ok, err := database.CheckToken(db, payload.Token)
+		ok, err := database.CheckToken(db, apiToken)
 		if err != nil {
-			log.Printf("database.CheckToken(db, payload.Token): %v", err)
-			http.Error(w, fmt.Sprintf("database.CheckToken(db, payload.Token): %v", err), http.StatusInternalServerError)
+			log.Printf("database.CheckToken(db, apiToken): %v", err)
+			http.Error(w, fmt.Sprintf("database.CheckToken(db, apiToken): %v", err), http.StatusInternalServerError)
 			return
 		}
 		if !ok {
