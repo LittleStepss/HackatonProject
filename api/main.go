@@ -39,7 +39,6 @@ func main() {
 			http.Error(w, "wrong request method", http.StatusMethodNotAllowed)
 			return
 		}
-		// Decode the json payload body
 		apiToken := r.Header.Get("API_TOKEN")
 		// Validate the token
 		ok, err := database.CheckToken(db, apiToken)
