@@ -104,9 +104,9 @@ func main() {
 			http.Error(w, "wrong request method", http.StatusMethodNotAllowed)
 			return
 		}
+		apiToken := r.Header.Get("API_TOKEN")
 		var payload struct {
 			Message  string `json:"message"`
-			ApiToken string `json:"api_token"`
 			Score    int    `json:"score"`
 		}
 		if err := json.NewDecoder(r.Body).Decode(&payload); err != nil {
@@ -114,7 +114,7 @@ func main() {
 			http.Error(w, fmt.Sprintf("json.NewDecoder(r.Body).Decode(&payload): %v", err), http.StatusInternalServerError)
 			return
 		}
-		mail, err := base64.StdEncoding.DecodeString(payload.ApiToken)
+		mail, err := base64.StdEncoding.DecodeString(apiToken)
 		if err != nil {
 			log.Printf("ase64.StdEncoding.DecodeString: %v", err)
 			http.Error(w, fmt.Sprintf("ase64.StdEncoding.DecodeString: %v", err), http.StatusInternalServerError)
