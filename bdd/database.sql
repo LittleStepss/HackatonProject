@@ -34,7 +34,7 @@ insert into user(mail, status, hash) values("enzo.sanchez@ynov.com", "admin", "b
 INSERT INTO teacher(firstname, lastname, sector, module) 
 VALUES 
     ('Noa', 'Martin', 'informatique', 'python'),
-    ('jeanClaude', 'Dus', 'Relationnel', 'Drague'),
+    ('Jean-Claude', 'Dus', 'Relationnel', 'Drague'),
     ('Francois', 'Pignon', 'Relationnel', 'Allôteur'),
     ('Beyoncé', 'Knowles', 'informatique', 'NextJs'),
     ('Alexis', 'bogoss', 'informatique', 'Golang'),
