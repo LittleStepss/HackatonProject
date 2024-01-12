@@ -43,5 +43,8 @@ VALUES
     ('Rachida', 'Dati', 'informatique', 'Culture générale'),
     ('Gabriel', 'Attal', 'informatique', 'Tronc Commun'),
     ('Gérard ', 'Depardieu', 'Relationnel', 'Respect des femmes'),
-    ('Philippe', 'Boxho', 'informatique', 'Administration système'),
+    ('Philippe', 'Boxho', 'informatique', 'Administration système'), 
+    ('Tom', 'Jegou', 'informatique', 'Mépriscript'),
+    ('Corentin', 'Hournass', 'informatique', 'GLPI'),
+    ('Fabien ', 'Roux', 'informatique', 'Réseaux'),
     ('Sophie', 'Dubois', 'informatique', 'c#');
