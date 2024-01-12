@@ -30,8 +30,11 @@ async function getTeacher(teacherId: number) {
 
 export default async function Poll({ params }: { params: { teacher_id: number } }) {
     const data = await getTeacher(params.teacher_id)
+    async function submitForm(formData: FormData) {
+
+    }
     return (
-        <div className="w-full min-h-screen flex flex-col flex-wrap justify-start item-center">
+        <div className="w-full min-h-screen flex flex-col flex-wrap justify-center item-center">
             <div className="flex flex-row flex-wrap justify-center items-center gap-7 text-6xl">
                 <p>
                     {data.firstname}
@@ -44,6 +47,12 @@ export default async function Poll({ params }: { params: { teacher_id: number } 
                 <p>{data.sector}</p>
                 <p>{data.module}</p>
             </div>
+            <form
+                className=""
+
+            >
+
+            </form>
         </div>
     )
 }
