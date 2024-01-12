@@ -52,6 +52,8 @@ export default async function Poll({ params }: { params: { teacher_id: number } 
             })
             if (!res.ok) {
                 console.log("Error")
+            } else {
+                redirect("")
             }
         } else {
             redirect("/")
