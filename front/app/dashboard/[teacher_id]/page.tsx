@@ -34,7 +34,7 @@ export default async function Poll({ params }: { params: { teacher_id: number } 
 
     }
     return (
-        <div className="w-full min-h-screen flex flex-col flex-wrap justify-center item-center">
+        <div className="w-full min-h-screen flex flex-col flex-wrap justify-start item-center">
             <div className="flex flex-row flex-wrap justify-center items-center gap-7 text-6xl">
                 <p>
                     {data.firstname}
@@ -43,15 +43,40 @@ export default async function Poll({ params }: { params: { teacher_id: number } 
                     {data.lastname}
                 </p>
             </div>
-            <div>
+            <div className="flex flex-col justify-center items-center">
                 <p>{data.sector}</p>
                 <p>{data.module}</p>
             </div>
             <form
-                className=""
-
+                className="flex flex-col justify-center items-center gap-9"
             >
-
+                <div className="flex flex-col justify-center items-start">
+                    <label>Qu'avez vous pensé de l'intervenant ?</label>
+                    <textarea name="message" className="bg-[#F8FAFC] min-h-40 min-w-96" />
+                </div>
+                <div className="flex flex-row flex-wrap justify-center items-center gap-6">
+                    <div className="flex flex-col flex-wrap justify-center items-center">
+                        <label>1</label>
+                        <input type="radio" name="score" value="1" />
+                    </div>
+                    <div className="flex flex-col flex-wrap justify-center items-center">
+                        <label>2</label>
+                        <input type="radio" name="score" value="2" />
+                    </div>
+                    <div className="flex flex-col flex-wrap justify-center items-center">
+                        <label>3</label>
+                        <input type="radio" name="score" value="3" />
+                    </div>
+                    <div className="flex flex-col flex-wrap justify-center items-center">
+                        <label>4</label>
+                        <input type="radio" name="score" value="4" />
+                    </div>
+                    <div className="flex flex-col flex-wrap justify-center items-center">
+                        <label>5</label>
+                        <input type="radio" name="score" value="5" />
+                    </div>
+                </div>
+                <input type="submit" className="p-4 bg-[#7A5CFA] rounded-xl text-[#ffff]" />
             </form>
         </div>
     )
