@@ -15,3 +15,6 @@ Les trouvant insuffisants nous avons donc décidé de créer une nouvelle icône
 Cette dernière mène à une page de connexion puis à un espace de notation basé sur une échelle de 5 étoiles ainsi qu'un espace libre permettant d'écrire un avis sur l'intervenant.  
 Après avoir donné son avis et uniquement après, il sera possible de voir l'avis des autres membres de la **classe** ainsi que d'échanger avec eux.  
 Le but étant de recevoir des avis constructifs et non biaisé. Il n'y aura donc aucun anonymat.  
+
+### Wiki du projet disponible ici :
+https://github.com/LittleStepss/HackatonProject/wiki
