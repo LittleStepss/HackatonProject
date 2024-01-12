@@ -42,7 +42,7 @@ VALUES
     ('Stephane', 'Super', 'informatique', 'le Genialisme'),
     ('Rachida', 'Dati', 'informatique', 'Culture generale'),
     ('Gabriel', 'Attal', 'informatique', 'Tronc Commun'),
-    ('Gérard ', 'Depardieu', 'Relationnel', 'Cyberharcelement'),
+    ('Gerard ', 'Depardieu', 'Relationnel', 'Cyberharcelement'),
     ('Philippe', 'Boxho', 'informatique', 'Administration systeme'), 
     ('Tom', 'Jegou', 'informatique', 'Mepriscript'),
     ('Corentin', 'Hournass', 'informatique', 'GLPI'),
