@@ -18,3 +18,12 @@ Le but étant de recevoir des avis constructifs et non biaisé. Il n'y aura donc
 
 ### Wiki du projet disponible ici :
 https://github.com/LittleStepss/HackatonProject/wiki
+
+## Utilisation technique
+Deux commandes doivent être entrées pour lancer le projet :
+```bash
+docker compose pull
+```
+```bash
+docker compose up
+```
