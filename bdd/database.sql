@@ -51,6 +51,6 @@ VALUES
 INSERT INTO reported_polls(fk_user_mail, fk_user_status, fk_poll_comment) 
 VALUES 
     ('lucas.dupont@ynov.com', 'student', 'trop debile le prof'),
-    ('jade.garcia@ynov.com', 'student', 'nul éclaté'),
+    ('jade.garcia@ynov.com', 'student', 'hallo guten tag'),
     ('hugo.leroy@ynov.com', 'admin', 'Abusé trop naze '), /*admin can be reported*/
     ('emma.petit@ynov.com', 'student', 'je me suis endormis tellement il est nul et bête');
