@@ -140,8 +140,8 @@ func main() {
 		}
 		var payload struct {
 			Comment   string `json:"message"`
-			Score     int    `json:"score"`
-			IdTeacher int    `json:"id_teacher"`
+			Score     string `json:"score"`
+			IdTeacher string `json:"id_teacher"`
 		}
 		if err := json.NewDecoder(r.Body).Decode(&payload); err != nil {
 			log.Printf("json.NewDecoder(r.Body).Decode(&payload): %v", err)
@@ -160,6 +160,37 @@ func main() {
 			return
 		}
 		w.Write([]byte(`{"success":"poll created successfully"}`))
+	})
+	http.HandleFunc("/polls", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodGet {
+			http.Error(w, "wrong request method", http.StatusMethodNotAllowed)
+			return
+		}
+		apiToken := r.Header.Get("API_TOKEN")
+		ok, err := database.CheckToken(db, apiToken)
+		if err != nil {
+			log.Printf(`database.CheckToken(db, apiToken): %v`, err)
+			http.Error(w, fmt.Sprintf(`database.CheckToken(db, apiToken): %v`, err), http.StatusInternalServerError)
+			return
+		}
+		if !ok {
+			http.Error(w, "wrong token", http.StatusUnauthorized)
+			return
+		}
+		teacherId := r.URL.Query().Get("teacher_id")
+		polls, err := database.GetPolls(db, teacherId)
+		if err != nil {
+			log.Printf("database.GetPolls(db, teacherId): %v", err)
+			http.Error(w, fmt.Sprintf("database.GetPolls(db, teacherId): %v", err), http.StatusInternalServerError)
+			return
+		}
+		bytePolls, err := json.MarshalIndent(polls, "", "   ")
+		if err != nil {
+			log.Printf("json.MarshalIndent: %v", err)
+			http.Error(w, fmt.Sprintf("json.MarshalIndent: %v", err), http.StatusInternalServerError)
+			return
+		}
+		w.Write([]byte(bytePolls))
 	})
 	// Start the api
 	fmt.Printf("Api is up on address: 0.0.0.0:%d => http://localhost:%d 🔥\n", port, port)
