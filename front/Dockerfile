@@ -6,4 +6,4 @@ COPY package.json .
 RUN npm ci
 COPY . .
 RUN npx next build
-CMD [ "npx", "next", "run", "-p", "80" ]
+CMD [ "npx", "next", "start", "-p", "80" ]

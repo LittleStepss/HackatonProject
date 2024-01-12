@@ -7,3 +7,4 @@ services:
       dockerfile: Dockerfile
     ports:
       - "2020:2020"
+    restart: unless-stopped
