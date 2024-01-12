@@ -3,6 +3,7 @@ import './globals.css'
 import Image from 'next/image'
 import logo from './public/logo.png'
 import Footer from './footer'
+import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Hackaton',
@@ -16,8 +17,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr">
-      <body className="min-h-screen overflow-hidden flex flex-wrap flex-col justify-center items-center">
-        <Image src={logo} alt="logo" className="absolute top-0 left-0" />
+      <body className="min-h-screen overflow-x-hidden overflow-y-scroll flex flex-wrap flex-col justify-center items-center">
+        <Link href="/" >
+          <Image src={logo} alt="logo" />
+        </Link>
         {children}
         <Footer />
       </body>

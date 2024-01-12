@@ -29,10 +29,9 @@ async function getData() {
 export default async function Dashboard() {
     const data = await getData()
     return (
-        <div className="flex flex-col flex-wrap justify-center items-center">
+        <div className="flex flex-col flex-wrap justify-center items-center pb-6">
             <LogoutButton />
-            <h1 className="absolute top-10 text-6xl">Dashboard</h1>
-            <div className="w-[90vw] flex flex-wrap flex-row justify-start items-center gap-24">
+            <div className="w-[90vw] flex flex-wrap flex-row justify-start items-center gap-28">
                 {
                     data.map((teacher: {
                         "teacher_id": string,
