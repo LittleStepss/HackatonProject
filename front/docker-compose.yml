@@ -1,0 +1,9 @@
+services:
+  front:
+    image: tomyj/hackaton-front
+    container_name: hackaton-front
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"

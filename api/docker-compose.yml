@@ -1,0 +1,9 @@
+services:
+  api:
+    image: tomyj/hackaton:api
+    container_name: hackaton-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "2020:2020"
