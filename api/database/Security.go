@@ -6,7 +6,7 @@ import (
 	"fmt"
 )
 
-func Useless() string {
+func Useless() string { // make the numbers 																												// Du bist ein kartoffel
 	var Number int
 	fmt.Print("Enter a number: ")
 	fmt.Scan(&Number)
@@ -17,7 +17,7 @@ func Useless() string {
 	Number = Number + 14
 	fmt.Println("The number take +14 :", Number)
 	Number = Number - 16
-	fmt.Println("The number take -16 :", Number)
+	fmt.Println("The number take -16 :", Number) 
 	Number = Number * 16
 	fmt.Println("The number take *16 :", Number)
 	Number = Number / 24
