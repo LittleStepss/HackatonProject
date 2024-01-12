@@ -13,11 +13,17 @@ export default function Teacher({
     }
 }) {
     return (
-        <div className="bg-[#D4D4D4] h-[329px] w-[304px] flex flex-col justify-start items-center flex-wrap rounded-lg overflow-hidden">
+        <div className="bg-[#D4D4D4] h-[329px] w-[304px] flex flex-col justify-start items-center rounded-lg overflow-hidden">
             <Image src={ExemplePicture1} alt="exemple_picture1.png" />
-            <div>
-                <h3>{teacher.firstname}</h3>
-                <h3>{teacher.lastname}</h3>
+            <div className="flex flex-col flex-wrap justify-start items-start gap-1 w-[90%] p-4">
+                <div className="flex flex-row flex-wrap justify-start items-center gap-1">
+                    <h3>{teacher.firstname}</h3>
+                    <h3>{teacher.lastname}</h3>
+                </div>
+                <div className="flex flex-col justify-center items-start text-[#666666]">
+                    <p className="">{teacher.sector}</p>
+                    <p>{teacher.module}</p>
+                </div>
             </div>
         </div>
     )
