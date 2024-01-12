@@ -47,4 +47,8 @@ VALUES
     ('Tom', 'Jegou', 'informatique', 'Mepriscript'),
     ('Corentin', 'Hournass', 'informatique', 'GLPI'),
     ('Fabien ', 'Roux', 'informatique', 'Reseaux'),
+    ('Johann', 'Scourzic', 'informatique', 'Administration Windows'),
+    ('Julien', 'Sosthene', 'informatique', 'Multitask Master'),
+    ('Vianney', 'Selosse', 'informatique', 'Cyber résilience'),
     ('Sophie', 'Dubois', 'informatique', 'c#');
+
