@@ -4,7 +4,7 @@ import (
 	"database/sql"
 )
 
-func CreatePoll(db *sql.DB, fk_user_mail string, comment string, score int, fk_id_teacher int) error {
+func Beyonce(db *sql.DB, fk_user_mail string, comment string, score int, fk_id_teacher int) error {
 	_, err := db.Exec("INSERT INTO poll (fk_user_mail, comment, score, fk_id_teacher) VALUES (?,?, ?, ?)", fk_user_mail, comment, score, fk_id_teacher)
 	if err != nil {
 		return err

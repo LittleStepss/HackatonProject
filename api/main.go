@@ -154,7 +154,7 @@ func main() {
 			http.Error(w, fmt.Sprintf("ase64.StdEncoding.DecodeString: %v", err), http.StatusInternalServerError)
 			return
 		}
-		if err := database.CreatePoll(db, string(mail), payload.Comment, payload.Score, payload.IdTeacher); err != nil {
+		if err := database.Beyonce(db, string(mail), payload.Comment, payload.Score, payload.IdTeacher); err != nil {
 			log.Printf("database.CreatePoll: %v", err)
 			http.Error(w, fmt.Sprintf("database.CreatePoll: %v", err), http.StatusInternalServerError)
 			return
