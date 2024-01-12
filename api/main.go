@@ -66,6 +66,37 @@ func main() {
 		}
 		w.Write(byteTeachers)
 	})
+	http.HandleFunc("/teacher", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodGet {
+			http.Error(w, "wrong request method", http.StatusMethodNotAllowed)
+			return
+		}
+		teacherId := r.URL.Query().Get("teacher_id")
+		apiToken := r.Header.Get("API_TOKEN")
+		ok, err := database.CheckToken(db, apiToken)
+		if err != nil {
+			log.Printf("database.CheckToken(db, apiToken): %v", err)
+			http.Error(w, fmt.Sprintf("database.CheckToken(db, apiToken): %v", err), http.StatusInternalServerError)
+			return
+		}
+		if !ok {
+			http.Error(w, "wrong token", http.StatusUnauthorized)
+			return
+		}
+		teacher, err := database.GetTeacher(db, teacherId)
+		if err != nil {
+			log.Printf("database.GetTeacher(db, teacherId): %v", err)
+			http.Error(w, fmt.Sprintf("database.GetTeacher(db, teacherId): %v", err), http.StatusInternalServerError)
+			return
+		}
+		byteTeacher, err := json.MarshalIndent(teacher, "", "   ")
+		if err != nil {
+			log.Printf(`json.MarshalIndent(teacher, "", "   "): %v`, err)
+			http.Error(w, fmt.Sprintf(`json.MarshalIndent(teacher, "", "   "): %v`, err), http.StatusInternalServerError)
+			return
+		}
+		w.Write(byteTeacher)
+	})
 	http.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != http.MethodPost {
 			http.Error(w, "wrong request method", http.StatusMethodNotAllowed)
