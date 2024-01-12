@@ -1,5 +1,6 @@
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
+import LogoutButton from "../logoutButton"
 import Teacher from "./teacher"
 
 async function getData() {
@@ -18,15 +19,18 @@ async function getData() {
             },
             cache: "no-store",
         })
+        if (!res.ok) {
+            redirect("/logout")
+        }
         return res.json()
     }
 }
 
 export default async function Dashboard() {
     const data = await getData()
-
     return (
         <div className="flex flex-col flex-wrap justify-center items-center">
+            <LogoutButton />
             <h1 className="absolute top-10 text-6xl">Dashboard</h1>
             <div className="w-[90vw] flex flex-wrap flex-row justify-start items-center gap-24">
                 {

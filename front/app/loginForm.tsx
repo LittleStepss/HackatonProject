@@ -2,6 +2,9 @@ import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
 export default async function LoginForm() {
+    if (cookies().get("API_TOKEN") != undefined && cookies().get("API_TOKEN")?.value != "") {
+        redirect("/dashboard")
+    }
     async function submitform(formData: FormData) {
         'use server'
         let apiHostname = "localhost"
