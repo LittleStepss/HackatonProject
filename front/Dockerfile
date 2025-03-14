@@ -1,4 +1,4 @@
-FROM tomyj/my-env:node
+FROM node:20-alpine
 ENV API_HOSTNAME=api
 WORKDIR /app
 COPY package-lock.json .

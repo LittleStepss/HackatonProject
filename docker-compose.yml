@@ -1,7 +1,7 @@
 services:
   api:
-    image: tomyj/hackaton:api
-    container_name: hackaton-api
+    image: hackaton-project/api
+    container_name: hackaton-api-container
     build:
       context: ./api
       dockerfile: Dockerfile
@@ -9,11 +9,11 @@ services:
       - db
     restart: unless-stopped
   db:
-    container_name: hackaton-db
+    container_name: hackaton-db-container
     build:
       context: ./bdd
       dockerfile: Dockerfile
-    image: tomyj/hackaton:db
+    image: hackaton-project/db
     restart: unless-stopped
     environment:
       MYSQL_DATABASE: "db"
@@ -23,8 +23,8 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
   front:
-    image: tomyj/hackaton-front
-    container_name: hackaton-front
+    image: hackaton-project/front
+    container_name: hackaton-front-container
     build:
       context: ./front
       dockerfile: Dockerfile

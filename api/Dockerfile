@@ -1,4 +1,4 @@
-FROM tomyj/my-env:go
+FROM golang:1.21-alpine
 ENV DB_HOSTNAME=db
 WORKDIR /app
 COPY . .
